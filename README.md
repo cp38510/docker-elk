@@ -116,7 +116,7 @@ If you are starting the stack for the very first time, please read the section b
 The stack is pre-configured with the following **privileged** bootstrap user:
 
 * user: *elastic*
-* password: *changeme*
+* password: *H8GMM9s0NK*
 
 Although all stack components work out-of-the-box with this user, we strongly recommend using the unprivileged [built-in
 users][builtin-users] instead for increased security. Passwords for these users must be initialized:

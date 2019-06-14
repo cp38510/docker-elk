@@ -8,4 +8,4 @@ xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
 ## X-Pack security credentials
 #
 xpack.monitoring.elasticsearch.username: elastic
-xpack.monitoring.elasticsearch.password: changeme
+xpack.monitoring.elasticsearch.password: H8GMM9s0NK
