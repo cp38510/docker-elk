@@ -60,7 +60,7 @@ services:
   nginx:
     image: nginx
     volumes:
-      - /root/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx_elk_no_ssl_docker:/etc/nginx/conf.d/default.conf
     ports:
       - "80:80"
     networks:

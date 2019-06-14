@@ -50,14 +50,14 @@
   - name: set kibana domain
     raw: /bin/bash -c "find /srv/docker-elk -type f -name '*' -exec sed -i -r 's%kibana.domain.com%{{kibana_domain}}%g' {} \;"
 
-  - name: install nginx
-    package:
-      name: nginx
-      state: present
+#  - name: install nginx
+#    package:
+#      name: nginx
+#      state: present
 
 
-  - name: Copy file Nginx settings
-    raw: rm -r /etc/nginx/sites-available/default && cp /srv/docker-elk/nginx_elk_no_ssl /etc/nginx/sites-available/default
+#  - name: Copy file Nginx settings
+#    raw: rm -r /etc/nginx/sites-available/default && cp /srv/docker-elk/nginx_elk_no_ssl /etc/nginx/sites-available/default
 
   - name: Copy file elk.servise
     raw: cp /srv/docker-elk/elk.service /etc/systemd/system/elk.service
