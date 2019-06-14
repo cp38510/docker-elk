@@ -4,6 +4,28 @@
 [![Elastic Stack version](https://img.shields.io/badge/ELK-7.0.1-blue.svg?style=flat)](https://github.com/deviantony/docker-elk/issues/382)
 [![Build Status](https://api.travis-ci.org/deviantony/docker-elk.svg?branch=master)](https://travis-ci.org/deviantony/docker-elk)
 
+
+
+## Install ELK stack with Ansible
+
+```
+git clone https://github.com/cp38510/docker-elk/blob/master/install_elk_stack_with_docker.yml
+
+set host and variables:
+
+  hosts: ###
+  become: yes
+  vars:
+    elastic_domain: elastic1.domain.com
+    kibana_domain: kibana1.domain.com
+    passwords_elk: cqmdZnoHb1k3
+
+ansible-playbook install_elk_stack_with_docker.yml
+
+```
+
+
+
 Run the latest version of the [Elastic stack][elk-stack] with Docker and Docker Compose.
 
 It gives you the ability to analyze any data set by using the searching/aggregation capabilities of Elasticsearch and
