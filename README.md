@@ -9,7 +9,9 @@
 ## Install ELK stack with Ansible
 
 ```
-git clone https://github.com/cp38510/docker-elk/blob/master/install_elk_stack_with_docker.yml
+$ git clone https://github.com/cp38510/docker-elk/blob/master/install_elk_stack_with_docker.yml
+
+$ vim install_elk_stack_with_docker.yml
 
 set host and variables:
 
@@ -20,11 +22,12 @@ set host and variables:
     kibana_domain: kibana1.domain.com
     passwords_elk: cqmdZnoHb1k3
 
-ansible-playbook install_elk_stack_with_docker.yml
+
+$ ansible-playbook install_elk_stack_with_docker.yml
 
 ```
 
-
+## Manual install ELK stack 
 
 Run the latest version of the [Elastic stack][elk-stack] with Docker and Docker Compose.
 
