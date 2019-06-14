@@ -27,6 +27,14 @@ $ ansible-playbook install_elk_stack_with_docker.yml
 
 ```
 
+All files locate in /srv/docker-elk 
+
+Manage ELK stack you can with:
+```
+systemctl start/stop elk
+```
+
+
 ## Manual install ELK stack 
 
 Run the latest version of the [Elastic stack][elk-stack] with Docker and Docker Compose.
