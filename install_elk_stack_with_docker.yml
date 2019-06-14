@@ -1,0 +1,78 @@
+---
+- name: Install ELK cluster
+  hosts: ###
+  become: yes
+  vars:
+    elastic_domain: elastic1.domain.com
+    kibana_domain: kibana1.domain.com
+    passwords_elk: cqmdZnoHb1k3
+
+
+
+  tasks:
+
+  - name: Add Docker GPG key
+    apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+
+  - name: Add Docker APT repository
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
+
+  - name: Install list of packages
+    apt:
+      name: ['apt-transport-https','ca-certificates','curl','software-properties-common','docker-ce']
+      state: present
+      update_cache: yes
+
+  - name: Install Docker Compose
+    get_url:
+      url: https://github.com/docker/compose/releases/download/1.24.0/docker-compose-Linux-x86_64
+      dest: /bin/docker-compose
+      mode: 0755
+
+
+
+
+
+
+
+  - name: clone ELK-repo
+    git:
+      repo: 'https://github.com/cp38510/docker-elk.git'
+      dest: /srv/docker-elk
+
+  - name: set password
+    raw: /bin/bash -c "find /srv/docker-elk -type f -name '*' -exec sed -i -r 's%H8GMM9s0NK%{{passwords_elk}}%g' {} \;"
+
+  - name: set elastic domain
+    raw: /bin/bash -c "find /srv/docker-elk -type f -name '*' -exec sed -i -r 's%elastic.domain.com%{{elastic_domain}}%g' {} \;"
+
+  - name: set kibana domain
+    raw: /bin/bash -c "find /srv/docker-elk -type f -name '*' -exec sed -i -r 's%kibana.domain.com%{{kibana_domain}}%g' {} \;"
+
+  - name: install nginx
+    package:
+      name: nginx
+      state: present
+
+
+  - name: Copy file Nginx settings
+    raw: rm -r /etc/nginx/sites-available/default && cp /srv/docker-elk/nginx_elk_no_ssl /etc/nginx/sites-available/default
+
+  - name: Copy file elk.servise
+    raw: cp /srv/docker-elk/elk.service /etc/systemd/system/elk.service
+
+
+
+  - name: restart service Nginx
+    systemd:
+      state: restarted
+      name: nginx
+      enabled: yes
+
+  - name: start service ELK
+    systemd:
+      state: started
+      daemon_reload: yes
+      name: elk
+      enabled: yes
