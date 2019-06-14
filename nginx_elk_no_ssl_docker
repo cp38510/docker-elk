@@ -1,0 +1,15 @@
+server {
+    listen          80;
+    server_name     kibana.domain.com;
+    location / {
+        proxy_pass  http://kibana:5601/;
+    }
+}
+
+server {
+    listen          80;
+    server_name     elastic.domain.com;
+    location / {
+        proxy_pass  http://elasticsearch:9200/;
+    }
+}
