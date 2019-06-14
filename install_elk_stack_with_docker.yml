@@ -64,11 +64,11 @@
 
 
 
-  - name: restart service Nginx
-    systemd:
-      state: restarted
-      name: nginx
-      enabled: yes
+#  - name: restart service Nginx
+#    systemd:
+#      state: restarted
+#      name: nginx
+#      enabled: yes
 
   - name: start service ELK
     systemd:
