@@ -5,8 +5,8 @@ After=docker.service
 
 [Service]
 WorkingDirectory=/srv/docker-elk
-ExecStart=/usr/bin/docker-compose up
-ExecStop=/usr/bin/docker-compose down
+ExecStart=/bin/docker-compose up
+ExecStop=/bin/docker-compose down
 TimeoutStartSec=0
 Restart=on-failure
 #StandardOutput=/var/log/elk/output.log
