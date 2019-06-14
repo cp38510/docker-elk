@@ -1,0 +1,42 @@
+server {
+    listen 80;
+    server_name elastic.example.com kibana.example.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_certificate /etc/nginx/certs/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/nginx/certs/privkey.pem; # managed by Certbot
+    ssl_session_cache shared:SSL:10m;
+    client_max_body_size 20M;
+    server_name elastic.example.com;
+
+    satisfy any;
+    allow <TRUSTED IP ADDRESS HERE>;  # Укажите IP адрес, которому вы доверяете (например соседний сервер откуда вы отправляете запросы к Elastic)
+    allow <LOCAL IP ADDRESS HERE>;  # Если вы на одном сервере запустились, то укажите локальный адрес (127.0.0.1, 192.168.0.1 или какой-либо другой, посмотрите через какой интерфейс осуществяется передача данных)
+    # allow 172.17.0.0/24;
+    deny all;
+    auth_basic "closed site";
+    auth_basic_user_file htpasswd;
+
+    location / {
+        proxy_pass http://localhost:9200;
+    }
+}
+
+server {
+    listen 443 ssl;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_certificate /etc/nginx/certs/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/nginx/certs/privkey.pem; # managed by Certbot
+    ssl_session_cache shared:SSL:10m;
+    client_max_body_size 20M;
+    server_name kibana.example.com;
+    auth_basic "closed site";
+    auth_basic_user_file htpasswd;
+    location / {
+        proxy_pass http://localhost:5601;
+    }
+}
