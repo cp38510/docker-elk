@@ -6,7 +6,7 @@
 
 
 
-## Install ELK stack with Ansible
+## Install ELK stack with Ansible (Ubuntu 16, 18)
 
 ```
 $ git clone https://github.com/cp38510/docker-elk/blob/master/install_elk_stack_with_docker.yml
