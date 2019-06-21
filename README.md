@@ -396,3 +396,9 @@ instead of `elasticsearch`.
 [upgrade]: https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html
 
 [swarm-mode]: https://docs.docker.com/engine/swarm/
+
+
+## Features for next release
+
+- Test filebeat, heartbeat, metricbeat, packetbeat 
+https://github.com/elastic/stack-docker/blob/master/docker-compose.yml
